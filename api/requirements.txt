@@ -5,3 +5,5 @@ requests
 jinja2
 bs4
 lxml
+#tensorflow
+#transformers

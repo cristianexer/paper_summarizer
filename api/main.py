@@ -104,8 +104,10 @@ def summarize(url: str, max_length:int=3000, min_length:int=300):
         if tika_response.status_code == 200:
             logging.info(f'Applying Summarization model[file={local_filename}')
             
-         
-            raw_text = BeautifulSoup(tika_response.content.decode('utf-8'), 'lxml').select_one('body').text
+            raw_text = tika_response.json()
+            raw_text = raw_text.get("X-TIKA:content")
+            raw_text = BeautifulSoup(raw_text, 'lxml').select_one('body').text
+            # raw_text = tika_response.text
 
             payload = json.dumps({
                 'parameters': {'max_length': max_length, 'min_length': min_length},

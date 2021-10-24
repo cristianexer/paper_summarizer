@@ -9,7 +9,8 @@ services:
       - "9998:9998"
 
   api:
-    build: ./api
+    build: api
+    command: uvicorn main:app --host 0.0.0.0 --port 3000
     environment:
       - TIKA_URL=http://tika:9998/tika/forms
       - DEBUG=True
